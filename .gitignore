@@ -1,0 +1,28 @@
+# Environment variables
+backend/.env
+.env
+.env.*
+
+# Allow example environment file
+!backend/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-*
+
+# Node modules
+node_modules/
+
+# Build files
+dist/
+build/
+
+# IDE
+.vscode/

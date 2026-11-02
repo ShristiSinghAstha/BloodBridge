@@ -1,0 +1,10 @@
+{
+  "name": "bloodbridge-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BloodBridge HTML5, CSS3 & Vanilla JavaScript Frontend",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 5173"
+  }
+}

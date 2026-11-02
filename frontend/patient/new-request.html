@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Blood Request – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header id="bb-navbar"></header>
+
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <div style="max-width: 680px; margin: 0 auto;">
+          <div style="margin-bottom: 2rem;">
+            <h1 class="bb-heading-1">New Blood Request</h1>
+            <p class="bb-text-muted bb-mt-sm">
+              Fill in the details below. Our matching system will find compatible donors immediately.
+            </p>
+          </div>
+
+          <div class="bb-card">
+            <form id="new-request-form" novalidate>
+              <!-- Blood group + units -->
+              <div class="bb-flex bb-gap-md">
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="blood_group">Required Blood Group *</label>
+                  <select id="blood_group" name="blood_group" class="bb-select" required>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                  </select>
+                  <span id="err-blood_group" class="bb-form-error" style="display: none;"></span>
+                </div>
+
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="units_required">Units Required *</label>
+                  <input
+                    id="units_required"
+                    name="units_required"
+                    type="number"
+                    min="1"
+                    max="20"
+                    value="1"
+                    class="bb-input"
+                    required
+                  />
+                  <span id="err-units_required" class="bb-form-error" style="display: none;"></span>
+                </div>
+              </div>
+
+              <!-- Hospital select -->
+              <div class="bb-form-group">
+                <label class="bb-label" for="hospital">Hospital *</label>
+                <select id="hospital" name="hospital" class="bb-select" required>
+                  <option value="">— Select hospital —</option>
+                </select>
+                <span id="err-hospital" class="bb-form-error" style="display: none;"></span>
+              </div>
+
+              <!-- Urgency -->
+              <div class="bb-form-group">
+                <label class="bb-label" for="urgency">Urgency Level</label>
+                <select id="urgency" name="urgency" class="bb-select">
+                  <option value="critical">🔴 Critical – within hours</option>
+                  <option value="high" selected>🟠 High – within 24 hours</option>
+                  <option value="medium">🟡 Medium – within 3 days</option>
+                  <option value="low">🟢 Low – within a week</option>
+                </select>
+              </div>
+
+              <!-- Required by -->
+              <div class="bb-form-group">
+                <label class="bb-label" for="required_by">Required By (optional)</label>
+                <input
+                  id="required_by"
+                  name="required_by"
+                  type="datetime-local"
+                  class="bb-input"
+                />
+              </div>
+
+              <!-- Description notes -->
+              <div class="bb-form-group">
+                <label class="bb-label" for="description">Additional Notes (optional)</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  class="bb-textarea"
+                  rows="3"
+                  placeholder="Visible only to matched donors. Do not include confidential medical records."
+                ></textarea>
+              </div>
+
+              <div id="general-error" class="bb-alert bb-alert-error" style="display: none; margin-bottom: 1rem;"></div>
+
+              <div class="bb-flex bb-gap-md" style="margin-top: 0.5rem;">
+                <a href="dashboard.html" class="bb-btn bb-btn-secondary">
+                  Cancel
+                </a>
+                <button
+                  id="submit-btn"
+                  type="submit"
+                  class="bb-btn bb-btn-primary"
+                  style="flex: 1; justify-content: center;"
+                >
+                  🩸 Submit Blood Request
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <p class="bb-text-xs bb-text-muted" style="margin-top: 1rem; line-height: 1.6;">
+            ⚠️ This platform identifies potential donors only. Final transfusion compatibility
+            must be confirmed by qualified healthcare professionals and laboratory testing.
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/patient-new-request.js"></script>
+  </body>
+</html>

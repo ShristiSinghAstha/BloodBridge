@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Account – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header id="bb-navbar"></header>
+
+    <div
+      style="min-height: calc(100vh - 68px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(192,0,0,0.1) 0%, transparent 70%);"
+    >
+      <div style="width: 100%; max-width: 520px;">
+        <div class="bb-text-center" style="margin-bottom: 2rem;">
+          <h1 class="bb-heading-1">Create Your Account</h1>
+          <p class="bb-text-muted bb-mt-sm">
+            Already have an account?
+            <a href="login.html" style="color: var(--bb-red-400);">
+              Sign in
+            </a>
+          </p>
+        </div>
+
+        <div class="bb-card">
+          <!-- Role selector buttons -->
+          <div class="bb-flex bb-gap-sm" style="margin-bottom: 1.5rem;">
+            <button
+              id="role-patient-btn"
+              type="button"
+              class="bb-btn bb-btn-primary bb-w-full"
+              style="text-transform: capitalize; border-radius: 10px; justify-content: center;"
+            >
+              🏥 Patient
+            </button>
+            <button
+              id="role-donor-btn"
+              type="button"
+              class="bb-btn bb-btn-secondary bb-w-full"
+              style="text-transform: capitalize; border-radius: 10px; justify-content: center;"
+            >
+              🩸 Donor
+            </button>
+          </div>
+
+          <form id="register-form" novalidate>
+            <input type="hidden" id="role" name="role" value="patient" />
+
+            <div class="bb-flex bb-gap-md">
+              <div class="bb-form-group bb-w-full">
+                <label class="bb-label" for="first_name">First Name</label>
+                <input
+                  id="first_name"
+                  name="first_name"
+                  type="text"
+                  class="bb-input"
+                  placeholder="Alice"
+                  autocomplete="given-name"
+                  required
+                />
+                <span id="err-first_name" class="bb-form-error" style="display: none;"></span>
+              </div>
+
+              <div class="bb-form-group bb-w-full">
+                <label class="bb-label" for="last_name">Last Name</label>
+                <input
+                  id="last_name"
+                  name="last_name"
+                  type="text"
+                  class="bb-input"
+                  placeholder="Smith"
+                  autocomplete="family-name"
+                  required
+                />
+                <span id="err-last_name" class="bb-form-error" style="display: none;"></span>
+              </div>
+            </div>
+
+            <div class="bb-form-group">
+              <label class="bb-label" for="email">Email Address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                class="bb-input"
+                placeholder="alice@example.com"
+                autocomplete="email"
+                required
+              />
+              <span id="err-email" class="bb-form-error" style="display: none;"></span>
+            </div>
+
+            <div class="bb-form-group">
+              <label class="bb-label" for="phone">Phone Number (optional)</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                class="bb-input"
+                placeholder="+91 9876543210"
+              />
+              <span id="err-phone" class="bb-form-error" style="display: none;"></span>
+            </div>
+
+            <!-- Donor-specific onboarding fields -->
+            <div id="donor-fields" style="display: none; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+              <div class="bb-form-group">
+                <label class="bb-label" for="blood_group">Blood Group <span style="color: var(--bb-red-400);">*</span></label>
+                <select id="blood_group" name="blood_group" class="bb-input">
+                  <option value="">Select your blood group</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+                <span id="err-blood_group" class="bb-form-error" style="display: none;"></span>
+              </div>
+
+              <div class="bb-flex bb-gap-md">
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="city">City <span style="color: var(--bb-red-400);">*</span></label>
+                  <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    class="bb-input"
+                    placeholder="e.g. Bangalore"
+                  />
+                  <span id="err-city" class="bb-form-error" style="display: none;"></span>
+                </div>
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="state">State</label>
+                  <input
+                    id="state"
+                    name="state"
+                    type="text"
+                    class="bb-input"
+                    placeholder="e.g. Karnataka"
+                  />
+                  <span id="err-state" class="bb-form-error" style="display: none;"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bb-form-group">
+              <label class="bb-label" for="password">Password</label>
+              <div style="position: relative;">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="bb-input"
+                  placeholder="Min 8 characters"
+                  autocomplete="new-password"
+                  style="padding-right: 2.75rem;"
+                  required
+                />
+                <button
+                  id="toggle-reg-password"
+                  type="button"
+                  aria-label="Toggle password visibility"
+                  title="Toggle password visibility"
+                  style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--bb-grey-400); font-size: 1.1rem; padding: 0.25rem; display: flex; align-items: center;"
+                >
+                  👁️
+                </button>
+              </div>
+              <span id="err-password" class="bb-form-error" style="display: none;"></span>
+            </div>
+
+            <div class="bb-form-group">
+              <label class="bb-label" for="password2">Confirm Password</label>
+              <div style="position: relative;">
+                <input
+                  id="password2"
+                  name="password2"
+                  type="password"
+                  class="bb-input"
+                  placeholder="Repeat password"
+                  autocomplete="new-password"
+                  style="padding-right: 2.75rem;"
+                  required
+                />
+                <button
+                  id="toggle-reg-password2"
+                  type="button"
+                  aria-label="Toggle confirm password visibility"
+                  title="Toggle confirm password visibility"
+                  style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--bb-grey-400); font-size: 1.1rem; padding: 0.25rem; display: flex; align-items: center;"
+                >
+                  👁️
+                </button>
+              </div>
+              <span id="err-password2" class="bb-form-error" style="display: none;"></span>
+            </div>
+
+            <div id="general-error" class="bb-alert bb-alert-error" style="display: none; margin-bottom: 1rem;"></div>
+
+            <button
+              id="submit-btn"
+              type="submit"
+              class="bb-btn bb-btn-primary bb-w-full"
+              style="margin-top: 0.5rem; justify-content: center; height: 50px;"
+            >
+              Create Account
+            </button>
+          </form>
+        </div>
+
+        <p class="bb-text-center bb-text-xs bb-text-muted" style="margin-top: 1.5rem; line-height: 1.6;">
+          By registering you agree that blood donation decisions must be confirmed
+          by qualified healthcare professionals.
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 1.5rem 2rem; color: var(--bb-grey-500); font-size: 0.875rem;">
+      <div class="bb-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="bb-nav-logo" style="text-decoration: none;">
+          <span class="logo-dot"></span>
+          <span style="color: var(--bb-white); font-weight: 700; font-size: 1.1rem;">Blood<span class="bb-text-gradient">Bridge</span></span>
+        </div>
+        <div class="bb-flex bb-gap-md" style="flex-wrap: wrap;">
+          <a href="index.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Home</a>
+          <a href="hospitals.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Hospitals</a>
+          <a href="about.html" class="bb-nav-link" style="color: var(--bb-grey-400);">About</a>
+          <a href="login.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Sign In</a>
+          <a href="register.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Register</a>
+        </div>
+      </div>
+      <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 1.5rem;">
+        © 2026 BloodBridge. All rights reserved. For demonstration purposes only.
+      </div>
+    </footer>
+
+    <script type="module" src="js/pages/register.js"></script>
+  </body>
+</html>

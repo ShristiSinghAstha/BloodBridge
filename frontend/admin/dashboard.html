@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout: Sidebar + Main Content -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <!-- Loading Spinner -->
+        <div id="admin-loading" class="bb-flex bb-items-center bb-justify-center" style="min-height: 350px;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div id="admin-content" style="display: none;">
+          <!-- Header -->
+          <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h1 class="bb-heading-1">Platform Overview</h1>
+              <p class="bb-text-muted bb-mt-sm">
+                System-wide metrics, donor verification queue, and emergency activity.
+              </p>
+            </div>
+            <button id="refresh-stats-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+              🔄 Refresh Metrics
+            </button>
+          </div>
+
+          <!-- Primary Stats Row -->
+          <div class="bb-grid bb-grid-4" style="margin-bottom: 1.5rem;">
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-red">🩸</div>
+              <div>
+                <div id="stat-total-donors" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Total Donors</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-yellow">⏳</div>
+              <div>
+                <div id="stat-pending-donors" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Pending Verification</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-blue">📋</div>
+              <div>
+                <div id="stat-total-requests" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Total Requests</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-green">🏥</div>
+              <div>
+                <div id="stat-total-hospitals" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Partner Hospitals</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Detailed Breakdown Grid -->
+          <div class="bb-grid bb-grid-3" style="margin-bottom: 2.5rem;">
+            <!-- Donor Status Card -->
+            <div class="bb-card" style="padding: 1.5rem;">
+              <h3 class="bb-heading-3 bb-text-gradient" style="margin-bottom: 1rem;">
+                Donor Verification Breakdown
+              </h3>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Verified Donors:</span>
+                <strong id="stat-verified-donors" style="color: var(--bb-success);">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Pending Review:</span>
+                <strong id="stat-pending-donors-2" style="color: var(--bb-warning);">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Other / Rejected:</span>
+                <strong id="stat-other-donors" style="color: var(--bb-grey-400);">0</strong>
+              </div>
+            </div>
+
+            <!-- Blood Request Status Card -->
+            <div class="bb-card" style="padding: 1.5rem;">
+              <h3 class="bb-heading-3 bb-text-gradient" style="margin-bottom: 1rem;">
+                Blood Requests Status
+              </h3>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Active / In Progress:</span>
+                <strong id="stat-active-requests" style="color: var(--bb-info);">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Fulfilled:</span>
+                <strong id="stat-fulfilled-requests" style="color: var(--bb-success);">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Cancelled:</span>
+                <strong id="stat-cancelled-requests" style="color: var(--bb-grey-400);">0</strong>
+              </div>
+            </div>
+
+            <!-- Platform Users & Network Card -->
+            <div class="bb-card" style="padding: 1.5rem;">
+              <h3 class="bb-heading-3 bb-text-gradient" style="margin-bottom: 1rem;">
+                Platform Reach
+              </h3>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Estimated Registered Users:</span>
+                <strong id="stat-total-users">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center bb-mb-sm" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Unique Requesting Patients:</span>
+                <strong id="stat-total-patients">0</strong>
+              </div>
+              <div class="bb-flex bb-justify-between bb-items-center" style="font-size: 0.9375rem;">
+                <span class="bb-text-muted">Active Hospitals:</span>
+                <strong id="stat-active-hospitals">0</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity Section -->
+          <div class="bb-card" style="padding: 0; margin-bottom: 2.5rem;">
+            <div class="bb-flex bb-justify-between bb-items-center" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.07);">
+              <h2 class="bb-heading-3">Recent Blood Requests</h2>
+              <a href="requests.html" style="color: var(--bb-red-400); font-size: 0.875rem;">
+                View all requests →
+              </a>
+            </div>
+
+            <div id="recent-empty" class="bb-empty-state" style="display: none;">
+              <div class="bb-empty-state-icon">📋</div>
+              <p>No recent blood requests recorded.</p>
+            </div>
+
+            <div id="recent-table-container" class="bb-table-wrapper" style="border-radius: 0; border: none; display: none;">
+              <table class="bb-table">
+                <thead>
+                  <tr>
+                    <th>Blood Group</th>
+                    <th>Patient</th>
+                    <th>Hospital</th>
+                    <th>Urgency</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Actions Grid -->
+          <h2 class="bb-heading-3" style="margin-bottom: 1rem;">Administrative Controls</h2>
+          <div class="bb-grid bb-grid-4" style="margin-bottom: 2rem;">
+            <a href="donors.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">✅</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Donor Verification</h3>
+              <p class="bb-text-muted bb-text-xs">Review pending donor registrations and verification records.</p>
+            </a>
+
+            <a href="hospitals.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏥</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Manage Hospitals</h3>
+              <p class="bb-text-muted bb-text-xs">Register new transfusion centers, update GPS coords, and edit records.</p>
+            </a>
+
+            <a href="requests.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">🩸</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Blood Requests</h3>
+              <p class="bb-text-muted bb-text-xs">Filter and inspect emergency requests and response matches.</p>
+            </a>
+
+            <a href="users.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">User Directory</h3>
+              <p class="bb-text-muted bb-text-xs">Search accounts, verify roles, and manage permissions.</p>
+            </a>
+          </div>
+
+          <!-- Info banner with link to Django Admin -->
+          <div class="bb-alert bb-alert-info">
+            ℹ️ <strong>System Administration:</strong> For database-level superuser maintenance, model migrations, or raw table edits, access the
+            <a href="http://127.0.0.1:8000/admin/" target="_blank" rel="noreferrer" style="color: inherit; text-decoration: underline; font-weight: 600;">
+              Django Admin Interface (/admin/)
+            </a>.
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/admin-dashboard.js"></script>
+  </body>
+</html>
+

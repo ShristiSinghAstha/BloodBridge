@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Profile – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <!-- Header -->
+          <div style="margin-bottom: 2rem;">
+            <h1 class="bb-heading-1">My Donor Profile</h1>
+            <p class="bb-text-muted bb-mt-sm">
+              Keep your contact, blood group, and location details up to date to ensure accurate emergency matching.
+            </p>
+          </div>
+
+          <!-- Loading Spinner -->
+          <div id="profile-loading" class="bb-flex bb-justify-center bb-items-center" style="min-height: 250px;">
+            <div class="bb-spinner"></div>
+          </div>
+
+          <!-- Main Profile Container -->
+          <div id="profile-content" style="display: none;">
+            <!-- Status Overview Cards -->
+            <div class="bb-grid bb-grid-3" style="margin-bottom: 2rem;">
+              <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+                <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                  Verification Status
+                </div>
+                <div id="badge-verification-status"></div>
+                <p id="verification-note" class="bb-text-xs bb-text-muted" style="margin-top: 0.5rem;"></p>
+              </div>
+
+              <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+                <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                  Profile Completeness
+                </div>
+                <div id="badge-completeness"></div>
+                <p class="bb-text-xs bb-text-muted" style="margin-top: 0.5rem;">
+                  Requires Blood Group and City.
+                </p>
+              </div>
+
+              <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+                <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                  56-Day Medical Eligibility
+                </div>
+                <div id="badge-eligibility"></div>
+                <p id="eligibility-note" class="bb-text-xs bb-text-muted" style="margin-top: 0.5rem;"></p>
+              </div>
+            </div>
+
+            <!-- Profile Edit Form -->
+            <div class="bb-card">
+              <form id="profile-form" novalidate>
+                <!-- Section 1: Personal Information -->
+                <h3 class="bb-heading-3 bb-text-gradient" style="margin-bottom: 1.25rem;">
+                  1. Personal &amp; Contact Information
+                </h3>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="first_name">First Name *</label>
+                    <input
+                      id="first_name"
+                      name="first_name"
+                      type="text"
+                      class="bb-input"
+                      required
+                    />
+                    <span id="err-first_name" class="bb-form-error" style="display: none;"></span>
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="last_name">Last Name *</label>
+                    <input
+                      id="last_name"
+                      name="last_name"
+                      type="text"
+                      class="bb-input"
+                      required
+                    />
+                    <span id="err-last_name" class="bb-form-error" style="display: none;"></span>
+                  </div>
+                </div>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="email">Email Address</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      class="bb-input"
+                      disabled
+                      style="opacity: 0.7; cursor: not-allowed;"
+                    />
+                    <span class="bb-text-xs bb-text-muted">Managed via account login</span>
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="phone">Contact Phone</label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      class="bb-input"
+                      placeholder="+91 9876543210"
+                    />
+                    <span id="err-phone" class="bb-form-error" style="display: none;"></span>
+                  </div>
+                </div>
+
+                <!-- Section 2: Medical & Donation Info -->
+                <h3 class="bb-heading-3 bb-text-gradient" style="margin-top: 2rem; margin-bottom: 1.25rem;">
+                  2. Blood Group &amp; Donation History
+                </h3>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="blood_group">Blood Group *</label>
+                    <select id="blood_group" name="blood_group" class="bb-select" required>
+                      <option value="">— Select blood group —</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                    </select>
+                    <span id="err-blood_group" class="bb-form-error" style="display: none;"></span>
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="date_of_birth">Date of Birth</label>
+                    <input
+                      id="date_of_birth"
+                      name="date_of_birth"
+                      type="date"
+                      class="bb-input"
+                    />
+                    <span class="bb-text-xs bb-text-muted">Used for age eligibility verification</span>
+                  </div>
+                </div>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="last_donation_date">Last Donation Date</label>
+                    <input
+                      id="last_donation_date"
+                      name="last_donation_date"
+                      type="date"
+                      class="bb-input"
+                    />
+                    <span class="bb-text-xs bb-text-muted">Helps calculate 56-day medical eligibility</span>
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="availability">Availability Status *</label>
+                    <select id="availability" name="availability" class="bb-select" required>
+                      <option value="available">🟢 Available for Emergency Requests</option>
+                      <option value="busy">🟡 Temporarily Busy</option>
+                      <option value="unavailable">⚪ Unavailable</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Section 3: Location & GPS Coordinates -->
+                <div class="bb-flex bb-justify-between bb-items-center" style="margin-top: 2rem; margin-bottom: 1.25rem;">
+                  <h3 class="bb-heading-3 bb-text-gradient">
+                    3. Address &amp; Location Coordinates
+                  </h3>
+                  <button
+                    id="detect-gps-btn"
+                    type="button"
+                    class="bb-btn bb-btn-outline bb-btn-sm"
+                  >
+                    📍 Detect GPS Coordinates
+                  </button>
+                </div>
+
+                <div class="bb-form-group">
+                  <label class="bb-label" for="address">Street Address</label>
+                  <textarea
+                    id="address"
+                    name="address"
+                    class="bb-textarea"
+                    rows="2"
+                    placeholder="Enter your street address or neighbourhood"
+                  ></textarea>
+                </div>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="city">City *</label>
+                    <input
+                      id="city"
+                      name="city"
+                      type="text"
+                      class="bb-input"
+                      placeholder="e.g. Bangalore"
+                      required
+                    />
+                    <span id="err-city" class="bb-form-error" style="display: none;"></span>
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="state">State</label>
+                    <input
+                      id="state"
+                      name="state"
+                      type="text"
+                      class="bb-input"
+                      placeholder="e.g. Karnataka"
+                    />
+                  </div>
+                </div>
+
+                <div class="bb-flex bb-gap-md">
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="latitude">Latitude (GPS)</label>
+                    <input
+                      id="latitude"
+                      name="latitude"
+                      type="number"
+                      step="0.000001"
+                      class="bb-input"
+                      placeholder="12.971598"
+                    />
+                  </div>
+
+                  <div class="bb-form-group bb-w-full">
+                    <label class="bb-label" for="longitude">Longitude (GPS)</label>
+                    <input
+                      id="longitude"
+                      name="longitude"
+                      type="number"
+                      step="0.000001"
+                      class="bb-input"
+                      placeholder="77.594566"
+                    />
+                  </div>
+                </div>
+
+                <div id="general-error" class="bb-alert bb-alert-error" style="display: none; margin-bottom: 1.5rem;"></div>
+
+                <div class="bb-flex bb-justify-between bb-items-center" style="margin-top: 1.5rem;">
+                  <span class="bb-text-xs bb-text-muted">
+                    * Required fields for donor matching.
+                  </span>
+                  <button
+                    id="save-profile-btn"
+                    type="submit"
+                    class="bb-btn bb-btn-primary"
+                    style="padding: 0.8rem 2rem;"
+                  >
+                    💾 Save Profile Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/donor-profile.js"></script>
+  </body>
+</html>
+

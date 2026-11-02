@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Profile – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header id="bb-navbar"></header>
+
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <div style="max-width: 680px; margin: 0 auto;">
+          <div style="margin-bottom: 2rem;">
+            <h1 class="bb-heading-1">My Patient Profile</h1>
+            <p class="bb-text-muted bb-mt-sm">Update your contact details, personal information, and credentials.</p>
+          </div>
+
+          <!-- Personal Info Card -->
+          <div class="bb-card" style="margin-bottom: 2rem;">
+            <h2 class="bb-heading-3" style="margin-bottom: 1.25rem;">Personal Information</h2>
+            
+            <div id="profile-error" class="bb-alert bb-alert-error" style="display: none; margin-bottom: 1rem;"></div>
+
+            <form id="profile-form" novalidate>
+              <div class="bb-flex bb-gap-md">
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="first_name">First Name *</label>
+                  <input id="first_name" name="first_name" type="text" class="bb-input" required />
+                </div>
+                <div class="bb-form-group bb-w-full">
+                  <label class="bb-label" for="last_name">Last Name *</label>
+                  <input id="last_name" name="last_name" type="text" class="bb-input" required />
+                </div>
+              </div>
+
+              <div class="bb-form-group">
+                <label class="bb-label" for="email">Email Address</label>
+                <input id="email" name="email" type="email" class="bb-input" disabled style="opacity: 0.6; cursor: not-allowed;" />
+                <span class="bb-text-xs bb-text-muted">Email address is your primary account identifier and cannot be altered.</span>
+              </div>
+
+              <div class="bb-form-group">
+                <label class="bb-label" for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" class="bb-input" placeholder="+91 9876543210" />
+              </div>
+
+              <button id="save-profile-btn" type="submit" class="bb-btn bb-btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+
+          <!-- Change Password Card -->
+          <div class="bb-card">
+            <h2 class="bb-heading-3" style="margin-bottom: 1.25rem;">Change Password</h2>
+            
+            <div id="password-error" class="bb-alert bb-alert-error" style="display: none; margin-bottom: 1rem;"></div>
+
+            <form id="password-form" novalidate>
+              <div class="bb-form-group">
+                <label class="bb-label" for="old_password">Current Password *</label>
+                <input id="old_password" name="old_password" type="password" class="bb-input" required />
+              </div>
+
+              <div class="bb-form-group">
+                <label class="bb-label" for="new_password">New Password *</label>
+                <input id="new_password" name="new_password" type="password" class="bb-input" required />
+                <span class="bb-text-xs bb-text-muted">Must be at least 8 characters and include mixed case or numbers.</span>
+              </div>
+
+              <button id="change-pwd-btn" type="submit" class="bb-btn bb-btn-secondary">
+                Update Password
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/patient-profile.js"></script>
+  </body>
+</html>

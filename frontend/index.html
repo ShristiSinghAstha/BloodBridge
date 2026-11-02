@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BloodBridge – Smart Blood Donation &amp; Emergency Donor Matching</title>
+    <meta name="description" content="BloodBridge connects patients who need blood with compatible, nearby donors using real-time ABO/Rh matching and road-distance routing." />
+    <meta name="keywords" content="blood donation, blood bank, donor matching, emergency blood, blood compatibility" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero -->
+      <section class="bb-hero">
+        <div class="bb-container" style="position: relative; z-index: 1;">
+          <div style="max-width: 700px;">
+            <div class="bb-badge bb-badge-red" style="margin-bottom: 1.5rem;">
+              🩸 Emergency Donor Matching Platform
+            </div>
+
+            <h1 class="bb-display" style="margin-bottom: 1.5rem;">
+              Connect Blood
+              <span class="bb-text-gradient">Donors</span>
+              With Lives That Need It
+            </h1>
+
+            <p class="bb-text-muted" style="font-size: 1.125rem; max-width: 580px; margin-bottom: 2.5rem; line-height: 1.7;">
+              BloodBridge uses real-time road routing and ABO/Rh compatibility rules to match
+              patients with the nearest eligible, verified donors — in seconds.
+            </p>
+
+            <div id="hero-actions" class="bb-flex bb-gap-md" style="flex-wrap: wrap;">
+              <!-- Dynamic buttons rendered by landing.js -->
+              <a href="register.html?role=patient" class="bb-btn bb-btn-primary bb-btn-lg">
+                I Need Blood
+              </a>
+              <a href="register.html?role=donor" class="bb-btn bb-btn-secondary bb-btn-lg">
+                Become a Donor
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating blood drop decoration -->
+        <div
+          style="position: absolute; right: 8%; top: 50%; transform: translateY(-50%); font-size: 12rem; opacity: 0.08; user-select: none;"
+          class="bb-animate-heartbeat"
+          aria-hidden="true"
+        >
+          🩸
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="bb-section" style="border-top: 1px solid rgba(255,255,255,0.06);">
+        <div class="bb-container">
+          <div class="bb-grid bb-grid-4">
+            <div class="bb-stat-card">
+              <div>
+                <div class="bb-stat-value bb-text-gradient">8</div>
+                <div class="bb-stat-label">Blood Types Matched</div>
+              </div>
+            </div>
+            <div class="bb-stat-card">
+              <div>
+                <div class="bb-stat-value bb-text-gradient">56+</div>
+                <div class="bb-stat-label">Day Eligibility Check</div>
+              </div>
+            </div>
+            <div class="bb-stat-card">
+              <div>
+                <div class="bb-stat-value bb-text-gradient">OSRM</div>
+                <div class="bb-stat-label">Road Distance Routing</div>
+              </div>
+            </div>
+            <div class="bb-stat-card">
+              <div>
+                <div class="bb-stat-value bb-text-gradient">24/7</div>
+                <div class="bb-stat-label">Emergency Ready</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section class="bb-section">
+        <div class="bb-container">
+          <div class="bb-text-center bb-mb-xl" style="margin-bottom: 3rem;">
+            <h2 class="bb-heading-1">How BloodBridge Works</h2>
+            <p class="bb-text-muted bb-mt-md" style="max-width: 500px; margin: 0.75rem auto 0;">
+              From request to donation in the shortest time possible.
+            </p>
+          </div>
+
+          <div class="bb-grid bb-grid-2">
+            <div class="bb-card" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+              <div style="background: rgba(224,16,16,0.15); border: 1px solid rgba(224,16,16,0.3); border-radius: 12px; padding: 0.75rem 1rem; font-size: 1.75rem; flex-shrink: 0;">
+                🏥
+              </div>
+              <div>
+                <div class="bb-text-xs bb-text-muted" style="letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                  STEP 01
+                </div>
+                <h3 class="bb-heading-3" style="margin-bottom: 0.5rem;">Patient Submits Request</h3>
+                <p class="bb-text-muted bb-text-sm">
+                  Enter required blood group, hospital, and urgency level. The system immediately begins matching.
+                </p>
+              </div>
+            </div>
+
+            <div class="bb-card" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+              <div style="background: rgba(224,16,16,0.15); border: 1px solid rgba(224,16,16,0.3); border-radius: 12px; padding: 0.75rem 1rem; font-size: 1.75rem; flex-shrink: 0;">
+                🧬
+              </div>
+              <div>
+                <div class="bb-text-xs bb-text-muted" style="letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                  STEP 02
+                </div>
+                <h3 class="bb-heading-3" style="margin-bottom: 0.5rem;">Smart Compatibility Check</h3>
+                <p class="bb-text-muted bb-text-sm">
+                  Our ABO/Rh compatibility engine finds all eligible donors and ranks them by road travel time.
+                </p>
+              </div>
+            </div>
+
+            <div class="bb-card" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+              <div style="background: rgba(224,16,16,0.15); border: 1px solid rgba(224,16,16,0.3); border-radius: 12px; padding: 0.75rem 1rem; font-size: 1.75rem; flex-shrink: 0;">
+                📩
+              </div>
+              <div>
+                <div class="bb-text-xs bb-text-muted" style="letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                  STEP 03
+                </div>
+                <h3 class="bb-heading-3" style="margin-bottom: 0.5rem;">Donors Get Notified</h3>
+                <p class="bb-text-muted bb-text-sm">
+                  Verified, available donors matching your blood type receive instant in-app notifications.
+                </p>
+              </div>
+            </div>
+
+            <div class="bb-card" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+              <div style="background: rgba(224,16,16,0.15); border: 1px solid rgba(224,16,16,0.3); border-radius: 12px; padding: 0.75rem 1rem; font-size: 1.75rem; flex-shrink: 0;">
+                ❤️
+              </div>
+              <div>
+                <div class="bb-text-xs bb-text-muted" style="letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.25rem;">
+                  STEP 04
+                </div>
+                <h3 class="bb-heading-3" style="margin-bottom: 0.5rem;">Life Saved</h3>
+                <p class="bb-text-muted bb-text-sm">
+                  Donors respond, directions are provided, and the donation status is tracked end-to-end.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section id="cta-section" class="bb-section" style="text-align: center;">
+        <div class="bb-container">
+          <div class="bb-card bb-card-red" style="max-width: 640px; margin: 0 auto; text-align: center; padding: 3rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
+            <h2 class="bb-heading-2" style="margin-bottom: 0.75rem;">
+              Ready to Make a Difference?
+            </h2>
+            <p class="bb-text-muted" style="margin-bottom: 2rem;">
+              Register as a donor today. Your single donation can save up to three lives.
+            </p>
+            <a href="register.html?role=donor" class="bb-btn bb-btn-primary">
+              Register as a Donor
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 1.5rem 2rem; color: var(--bb-grey-500); font-size: 0.875rem;">
+      <div class="bb-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="bb-nav-logo" style="text-decoration: none;">
+          <span class="logo-dot"></span>
+          <span style="color: var(--bb-white); font-weight: 700; font-size: 1.1rem;">Blood<span class="bb-text-gradient">Bridge</span></span>
+        </div>
+        <div class="bb-flex bb-gap-md" style="flex-wrap: wrap;">
+          <a href="index.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Home</a>
+          <a href="hospitals.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Hospitals</a>
+          <a href="about.html" class="bb-nav-link" style="color: var(--bb-grey-400);">About</a>
+          <a href="login.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Sign In</a>
+          <a href="register.html" class="bb-nav-link" style="color: var(--bb-grey-400);">Register</a>
+        </div>
+      </div>
+      <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 1.5rem;">
+        © 2026 BloodBridge. For demonstration purposes only. All transfusion decisions must be made by qualified healthcare professionals.
+      </div>
+    </footer>
+
+    <script type="module" src="js/pages/landing.js"></script>
+  </body>
+</html>

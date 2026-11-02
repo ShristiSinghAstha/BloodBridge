@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incoming Blood Requests – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <!-- Header -->
+        <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h1 class="bb-heading-1">Incoming Blood Requests</h1>
+            <p class="bb-text-muted bb-mt-sm">
+              Review urgent blood requests matched to your blood group and location.
+            </p>
+          </div>
+          <button id="refresh-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+            🔄 Refresh
+          </button>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="bb-flex bb-gap-sm" style="margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <button id="filter-all" class="bb-btn bb-btn-primary bb-btn-sm" data-filter="all">All</button>
+          <button id="filter-pending" class="bb-btn bb-btn-secondary bb-btn-sm" data-filter="pending">Pending</button>
+          <button id="filter-accepted" class="bb-btn bb-btn-secondary bb-btn-sm" data-filter="accepted">Accepted</button>
+          <button id="filter-rejected" class="bb-btn bb-btn-secondary bb-btn-sm" data-filter="rejected">Declined</button>
+        </div>
+
+        <!-- Loading spinner -->
+        <div id="requests-loading" class="bb-flex bb-justify-center bb-items-center" style="min-height: 250px;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <!-- Main requests container -->
+        <div id="requests-content" style="display: none;">
+          <!-- Pending Requests Grid -->
+          <div id="pending-section" style="margin-bottom: 2.5rem;">
+            <h2 id="pending-count-title" class="bb-heading-3" style="margin-bottom: 1rem;">
+              Pending Requests
+            </h2>
+
+            <div id="pending-empty" class="bb-card bb-empty-state" style="display: none;">
+              <div class="bb-empty-state-icon">📭</div>
+              <p>No pending blood requests right now.</p>
+              <p class="bb-text-xs bb-text-muted" style="margin-top: 0.5rem;">
+                Keep your availability set to Available to receive real-time alerts.
+              </p>
+            </div>
+
+            <div id="pending-grid" class="bb-grid bb-grid-2"></div>
+          </div>
+
+          <!-- Past Responses Section -->
+          <div id="past-section" style="margin-top: 2rem;">
+            <h2 class="bb-heading-3" style="margin-bottom: 1rem;">
+              Response History
+            </h2>
+
+            <div id="past-empty" class="bb-card bb-empty-state" style="display: none;">
+              <div class="bb-empty-state-icon">📋</div>
+              <p>No past responses recorded yet.</p>
+            </div>
+
+            <div id="past-table-container" class="bb-table-wrapper" style="display: none;">
+              <table class="bb-table">
+                <thead>
+                  <tr>
+                    <th>Hospital</th>
+                    <th>Required Blood</th>
+                    <th>Units</th>
+                    <th>My Response</th>
+                    <th>Responded Date</th>
+                  </tr>
+                </thead>
+                <tbody id="past-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/donor-requests.js"></script>
+  </body>
+</html>
+

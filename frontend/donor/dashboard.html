@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Dashboard – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <!-- Loading State -->
+        <div id="dashboard-loading" class="bb-flex bb-items-center bb-justify-center" style="min-height: 350px;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div id="dashboard-content" style="display: none;">
+          <!-- Header -->
+          <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h1 id="donor-welcome-title" class="bb-heading-1">Donor Dashboard</h1>
+              <p id="donor-welcome-sub" class="bb-text-muted bb-mt-sm">
+                Welcome back. Your donations save lives.
+              </p>
+            </div>
+
+            <!-- Availability Status Management -->
+            <div class="bb-flex bb-items-center bb-gap-sm" style="flex-wrap: wrap;">
+              <span class="bb-text-sm bb-text-muted">Status:</span>
+              <div class="bb-flex bb-gap-xs">
+                <button
+                  id="avail-available-btn"
+                  type="button"
+                  class="bb-btn bb-btn-sm bb-btn-secondary"
+                  data-avail="available"
+                  title="Mark available for emergency matching"
+                >
+                  🟢 Available
+                </button>
+                <button
+                  id="avail-busy-btn"
+                  type="button"
+                  class="bb-btn bb-btn-sm bb-btn-secondary"
+                  data-avail="busy"
+                  title="Mark temporarily busy"
+                >
+                  🟡 Busy
+                </button>
+                <button
+                  id="avail-unavailable-btn"
+                  type="button"
+                  class="bb-btn bb-btn-sm bb-btn-secondary"
+                  data-avail="unavailable"
+                  title="Pause incoming requests"
+                >
+                  ⚪ Unavailable
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert: Incomplete Profile -->
+          <div id="alert-incomplete" class="bb-alert bb-alert-warning" style="display: none; margin-bottom: 1.5rem;">
+            ⚠️ Your donor profile is incomplete.
+            <a href="profile.html" style="color: inherit; text-decoration: underline; font-weight: 600;">
+              Complete it now
+            </a>
+            with your blood group and location to start receiving matching requests.
+          </div>
+
+          <!-- Alert: Verification Pending -->
+          <div id="alert-unverified" class="bb-alert bb-alert-info" style="display: none; margin-bottom: 1.5rem;">
+            ℹ️ Your donor profile is pending administrator verification. You will be matched with emergency requests once verified.
+          </div>
+
+          <!-- Alert: Ineligible Interval (<56 days) -->
+          <div id="alert-interval" class="bb-alert bb-alert-warning" style="display: none; margin-bottom: 1.5rem;">
+            ⏱️ <strong>Donation Recovery Interval:</strong> You last donated blood <span id="days-since-last"></span> days ago.
+            Health guidelines recommend waiting at least 56 days between whole-blood donations.
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="bb-grid bb-grid-4" style="margin-bottom: 2rem;">
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-red">🩸</div>
+              <div>
+                <div id="stat-blood-group" class="bb-stat-value">—</div>
+                <div class="bb-stat-label">Blood Type</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-yellow">📩</div>
+              <div>
+                <div id="stat-pending-requests" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Pending Requests</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-green">✅</div>
+              <div>
+                <div id="stat-accepted-requests" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Accepted Requests</div>
+              </div>
+            </div>
+
+            <div class="bb-stat-card">
+              <div class="bb-stat-icon bb-stat-icon-blue">🔔</div>
+              <div>
+                <div id="stat-unread-notifs" class="bb-stat-value">0</div>
+                <div class="bb-stat-label">Notifications</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second Stats Row: Verification, Donations, Last Donation -->
+          <div class="bb-grid bb-grid-3" style="margin-bottom: 2.5rem;">
+            <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+              <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                Verification Status
+              </div>
+              <div class="bb-flex bb-items-center bb-gap-sm">
+                <span id="badge-verification"></span>
+                <span id="label-coordinates" class="bb-text-xs bb-text-muted"></span>
+              </div>
+            </div>
+
+            <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+              <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                Total Donations Recorded
+              </div>
+              <div class="bb-flex bb-items-center bb-gap-sm">
+                <span id="stat-total-donations" style="font-size: 1.5rem; font-weight: 800;">0</span>
+                <span class="bb-text-xs bb-text-muted">donations</span>
+              </div>
+            </div>
+
+            <div class="bb-card" style="padding: 1.25rem 1.5rem;">
+              <div class="bb-text-xs bb-text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem;">
+                Last Donation Date
+              </div>
+              <div id="stat-last-donation-date" style="font-size: 1.125rem; font-weight: 700;">
+                Never
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Requests Section -->
+          <div class="bb-card" style="padding: 0; margin-bottom: 2rem;">
+            <div class="bb-flex bb-justify-between bb-items-center" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.07);">
+              <h2 class="bb-heading-3">Pending Blood Requests</h2>
+              <a href="requests.html" style="color: var(--bb-red-400); font-size: 0.875rem;">
+                View all incoming requests →
+              </a>
+            </div>
+
+            <div id="requests-empty" class="bb-empty-state" style="display: none;">
+              <div class="bb-empty-state-icon">📭</div>
+              <p>No pending blood requests right now.</p>
+              <p id="empty-state-hint" class="bb-text-xs bb-text-muted" style="margin-top: 0.5rem;">
+                You will receive in-app notifications when compatible patients need blood nearby.
+              </p>
+            </div>
+
+            <div id="requests-table-container" class="bb-table-wrapper" style="border-radius: 0; border: none; display: none;">
+              <table class="bb-table">
+                <thead>
+                  <tr>
+                    <th>Blood Group</th>
+                    <th>Hospital</th>
+                    <th>Urgency</th>
+                    <th>Status</th>
+                    <th>Date Received</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="requests-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Navigation Actions -->
+          <h2 class="bb-heading-3" style="margin-bottom: 1rem;">Quick Navigation</h2>
+          <div class="bb-grid bb-grid-4">
+            <a href="profile.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">👤</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">My Profile</h3>
+              <p class="bb-text-muted bb-text-xs">Update personal info, location coords, and blood group.</p>
+            </a>
+
+            <a href="requests.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🩸</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Incoming Requests</h3>
+              <p class="bb-text-muted bb-text-xs">Review pending hospital requests and respond directly.</p>
+            </a>
+
+            <a href="history.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📋</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Donation History</h3>
+              <p class="bb-text-muted bb-text-xs">View all past donations, dates, and verification status.</p>
+            </a>
+
+            <a href="notifications.html" class="bb-card" style="display: block; text-decoration: none;">
+              <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🔔</div>
+              <h3 class="bb-heading-3" style="font-size: 1.05rem; margin-bottom: 0.25rem;">Notifications</h3>
+              <p class="bb-text-muted bb-text-xs">Check instant matching alerts and status updates.</p>
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/donor-dashboard.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donation History – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <!-- Header -->
+        <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h1 class="bb-heading-1">Donation History</h1>
+            <p class="bb-text-muted bb-mt-sm">
+              Your verified contributions and hospital donation track record.
+            </p>
+          </div>
+          <button id="refresh-history-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+            🔄 Refresh
+          </button>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="bb-grid bb-grid-4" style="margin-bottom: 2rem;">
+          <div class="bb-stat-card">
+            <div class="bb-stat-icon bb-stat-icon-red">📋</div>
+            <div>
+              <div id="stat-total-donations" class="bb-stat-value">0</div>
+              <div class="bb-stat-label">Total Donations</div>
+            </div>
+          </div>
+
+          <div class="bb-stat-card">
+            <div class="bb-stat-icon bb-stat-icon-green">✅</div>
+            <div>
+              <div id="stat-verified-donations" class="bb-stat-value">0</div>
+              <div class="bb-stat-label">Verified Completed</div>
+            </div>
+          </div>
+
+          <div class="bb-stat-card">
+            <div class="bb-stat-icon bb-stat-icon-blue">📅</div>
+            <div>
+              <div id="stat-last-date" class="bb-stat-value" style="font-size: 1.25rem;">—</div>
+              <div class="bb-stat-label">Last Donation</div>
+            </div>
+          </div>
+
+          <div class="bb-stat-card">
+            <div class="bb-stat-icon bb-stat-icon-yellow">⏱️</div>
+            <div>
+              <div id="stat-eligibility" class="bb-stat-value" style="font-size: 1.25rem;">Eligible</div>
+              <div class="bb-stat-label">Medical Status</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="history-loading" class="bb-flex bb-justify-center bb-items-center" style="min-height: 250px;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <!-- History Card -->
+        <div id="history-card" class="bb-card" style="padding: 0; display: none;">
+          <div id="history-empty" class="bb-empty-state" style="display: none;">
+            <div class="bb-empty-state-icon">📋</div>
+            <p style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+              No donation history recorded yet
+            </p>
+            <p class="bb-text-sm bb-text-muted" style="max-width: 480px; margin: 0 auto 1.5rem;">
+              When you respond to emergency requests and complete blood donations at partner hospitals,
+              your verified records will appear here.
+            </p>
+            <a href="requests.html" class="bb-btn bb-btn-primary">
+              View Incoming Requests
+            </a>
+          </div>
+
+          <div id="history-table-container" class="bb-table-wrapper" style="border-radius: 0; border: none; display: none;">
+            <table class="bb-table">
+              <thead>
+                <tr>
+                  <th>Donation Date</th>
+                  <th>Hospital</th>
+                  <th>Request ID</th>
+                  <th>Status</th>
+                  <th>Verified</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/donor-history.js"></script>
+  </body>
+</html>
+

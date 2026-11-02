@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications – BloodBridge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <header id="bb-navbar"></header>
+
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div class="bb-flex bb-items-center bb-gap-md">
+            <h1 class="bb-heading-1">Patient Notifications</h1>
+            <span id="unread-count-badge" class="bb-badge bb-badge-red" style="display: none;">
+              0 unread
+            </span>
+          </div>
+          <div class="bb-flex bb-gap-sm">
+            <button id="refresh-notifs-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+              🔄 Refresh
+            </button>
+            <button id="mark-all-read-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+              ✓ Mark All as Read
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="bb-flex bb-gap-sm" style="margin-bottom: 1.5rem;">
+          <button id="filter-all" class="bb-btn bb-btn-primary bb-btn-sm" data-filter="all">All</button>
+          <button id="filter-unread" class="bb-btn bb-btn-secondary bb-btn-sm" data-filter="unread">Unread</button>
+          <button id="filter-read" class="bb-btn bb-btn-secondary bb-btn-sm" data-filter="read">Read</button>
+        </div>
+
+        <div id="notifs-loading" class="bb-flex bb-justify-center" style="padding: 3rem;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <div id="notifs-empty" class="bb-card bb-empty-state" style="display: none;">
+          <div class="bb-empty-state-icon">🔔</div>
+          <p>No notifications found matching your selection.</p>
+        </div>
+
+        <div id="notifs-container" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/patient-notifications.js"></script>
+  </body>
+</html>

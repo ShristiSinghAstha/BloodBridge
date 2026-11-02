@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Verification – BloodBridge Admin</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩸</text></svg>" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <!-- Global Navigation -->
+    <header id="bb-navbar"></header>
+
+    <!-- Dashboard Layout -->
+    <div class="bb-dashboard-layout">
+      <aside id="bb-sidebar"></aside>
+
+      <main class="bb-main-content">
+        <!-- Header -->
+        <div class="bb-flex bb-justify-between bb-items-center" style="margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h1 class="bb-heading-1">Donor Verification &amp; Registry</h1>
+            <p class="bb-text-muted bb-mt-sm">
+              Review registered donors, verify credentials, and manage donor eligibility.
+            </p>
+          </div>
+          <button id="refresh-donors-btn" class="bb-btn bb-btn-secondary bb-btn-sm">
+            🔄 Refresh Donors
+          </button>
+        </div>
+
+        <!-- Filter & Search Controls Bar -->
+        <div class="bb-card" style="padding: 1.25rem 1.5rem; margin-bottom: 2rem;">
+          <div class="bb-grid bb-grid-3">
+            <div class="bb-form-group" style="margin-bottom: 0;">
+              <label class="bb-label" for="donor-search">Search Donors</label>
+              <input
+                id="donor-search"
+                type="text"
+                class="bb-input"
+                placeholder="Search by name, email, or city…"
+              />
+            </div>
+
+            <div class="bb-form-group" style="margin-bottom: 0;">
+              <label class="bb-label" for="filter-blood-group">Blood Group</label>
+              <select id="filter-blood-group" class="bb-select">
+                <option value="all">All Blood Groups</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+              </select>
+            </div>
+
+            <div class="bb-form-group" style="margin-bottom: 0;">
+              <label class="bb-label" for="filter-verification">Verification Status</label>
+              <select id="filter-verification" class="bb-select">
+                <option value="all">All Verification Statuses</option>
+                <option value="pending">Pending Review</option>
+                <option value="verified">Verified</option>
+                <option value="rejected">Rejected</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="donors-loading" class="bb-flex bb-justify-center bb-items-center" style="min-height: 250px;">
+          <div class="bb-spinner"></div>
+        </div>
+
+        <!-- Donors Table Container -->
+        <div id="donors-content" class="bb-card" style="padding: 0; display: none;">
+          <div id="donors-empty" class="bb-empty-state" style="display: none;">
+            <div class="bb-empty-state-icon">👥</div>
+            <p>No donors found matching the selected filters.</p>
+          </div>
+
+          <div id="donors-table-container" class="bb-table-wrapper" style="border-radius: 0; border: none; display: none;">
+            <table class="bb-table">
+              <thead>
+                <tr>
+                  <th>Donor Name &amp; Email</th>
+                  <th>Blood Group</th>
+                  <th>Location</th>
+                  <th>Availability</th>
+                  <th>Verification</th>
+                  <th>Registered</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="donors-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Donor Detail & Verification Modal -->
+        <div id="donor-modal" class="bb-modal-overlay" style="display: none;">
+          <div class="bb-modal" style="max-width: 600px;">
+            <button id="modal-close-btn" class="bb-modal-close" aria-label="Close">&times;</button>
+            <div id="modal-body">
+              <div class="bb-flex bb-justify-center" style="padding: 3rem;">
+                <div class="bb-spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="../js/pages/admin-donors.js"></script>
+  </body>
+</html>
+
